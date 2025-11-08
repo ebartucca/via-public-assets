@@ -1,22 +1,18 @@
-<script>
-/* Minimal click tracker for "Join our waitlist" */
+// waitlist.js (Phase 1: click tracking only)
 window.dataLayer = window.dataLayer || [];
-
-// Wait for Framer to mount the button, then attach once.
-(function waitForBtn() {
+(function attach(){
   var btn = document.getElementById('via-submit');
-  if (!btn) return setTimeout(waitForBtn, 150);  // Framer loads async
+  if(!btn){ return setTimeout(attach,150); } // Framer mounts late
+  if(btn.__viaBound) return;
+  btn.__viaBound = true;
+  console.log('via-waitlist.js loaded; handler attached');
 
-  if (!btn.__viaBound) {
-    btn.__viaBound = true;
-    btn.addEventListener('click', function () {
-      // No PII — just metadata
-      window.dataLayer.push({
-        event: 'via_waitlist_click',
-        cta_id: 'via-submit',
-        page_location: window.location.pathname
-      });
+  btn.addEventListener('click', function(){
+    window.dataLayer.push({
+      event: 'via_waitlist_click',
+      cta_id: 'via-submit',
+      page_location: location.pathname
     });
-  }
+    console.log('[DL push] via_waitlist_click');
+  });
 })();
-</script>
