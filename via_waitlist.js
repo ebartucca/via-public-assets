@@ -9,10 +9,10 @@ window.dataLayer = window.dataLayer || [];
 
   btn.addEventListener('click', function(){
     window.dataLayer.push({
-      event: 'via_waitlist_click',
+      event: 'join_waitlist_click',
       cta_id: 'via-submit',
       page_location: location.pathname
     });
-    console.log('[DL push] via_waitlist_click');
+    console.log('[DL push] join_waitlist_click');
   });
 })();
